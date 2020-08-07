@@ -8,23 +8,28 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: "hulk",
-      burgerInputValue: false
+      inputValue: "",
+      burgerInputValue: false,
+      windowWidth: 0,
+      windowHeight: 0
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleBurgerInputValue = this.handleBurgerInputValue.bind(this);
-    this.heroNameInputValue = this.heroNameInputValue.bind(this);
-    this.heroButtonClickedValue = this.heroButtonClickedValue.bind(this);
+    this.bookNameInputValue = this.bookNameInputValue.bind(this);
+    this.bookButtonClickedValue = this.bookButtonClickedValue.bind(this);
   }
 
   componentDidMount() {
-    fetch("https://gateway.marvel.com:443/v1/public/characters?apikey=88ebe414618afa23ec34c99800b6ca2d&limit=100&offset=0")
-      .then((response) => response.json())
-      .then((data) => {
-        //  console.log("new data");
-        // console.log(data.data.results);
-      });
+    window.addEventListener("resize", this.updateDimensions);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  updateDimensions = () => {
+    this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
+  };
 
   handleInputValue(val) {
     this.setState({ inputValue: val });
@@ -32,13 +37,14 @@ class App extends React.Component {
 
   handleBurgerInputValue(val) {
     this.setState({ burgerInputValue: val });
+    console.log("gaasdasd");
   }
 
-  heroNameInputValue(val) {
-    this.setState({ inputValue: val });
+  bookNameInputValue(val) {
+    this.setState({ inputValue: "subject:" + val });
   }
 
-  heroButtonClickedValue(val) {
+  bookButtonClickedValue(val) {
     this.setState({ burgerInputValue: val });
   }
 
@@ -46,7 +52,7 @@ class App extends React.Component {
     return (
       <div className="website-wrapper">
         <Header handleInput={this.handleInputValue} handleBurgerInput={this.handleBurgerInputValue} burgerInputValue={this.state.burgerInputValue} />
-        <SideMenu burgerMenuInput={this.state.burgerInputValue} heroNameInput={this.heroNameInputValue} heroButtonClicked={this.heroButtonClickedValue} />
+        <SideMenu burgerMenuInput={this.state.burgerInputValue} bookNameInput={this.bookNameInputValue} bookButtonClicked={this.bookButtonClickedValue} />
         {this.state.inputValue !== "" ? <MainContent searchInput={this.state.inputValue} /> : null}
       </div>
     );

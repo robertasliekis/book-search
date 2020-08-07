@@ -1,5 +1,5 @@
 //Global values start
-@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Barlow:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@400;600;800&display=swap");
 
 *,
 *::before,
@@ -23,11 +23,15 @@ h6 {
   font-weight: 300;
 }
 
+:root {
+  --global-color1: rgb(92, 77, 49);
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Barlow", Helvetica, Sans-Serif;
+  font-family: "Spartan", Helvetica, Sans-Serif;
   height: 100%;
   width: 100%;
 }
@@ -52,12 +56,11 @@ body {
   @include dislapyFlexColumn();
   justify-content: flex-start;
   padding: 0 10rem;
-  background-image: url(./images/dot-pattern01.jpg);
   background-size: 0.5rem 0.5rem;
-  background-color: rgb(78, 78, 78);
+  background-color: rgb(221, 210, 194);
   background-blend-mode: multiply;
   min-height: 100vh;
-  padding-top: 6rem;
+  padding-top: 4rem;
 }
 
 .header {
@@ -66,15 +69,16 @@ body {
   top: 0;
   @include displayFlexBetween();
   width: 100%;
-  height: 6rem;
-  padding: 0 2rem;
-  background-color: black;
+  height: 4rem;
+  padding: 0 10rem;
+  background-color: rgb(194, 181, 161);
+  border-bottom: 2px solid rgb(150, 132, 105);
   .burger-menu {
     position: relative;
     @include dislapyFlexColumn();
     justify-content: space-between;
-    width: 3rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 1.5rem;
     cursor: pointer;
     transition: 0.3s all ease;
     .line {
@@ -82,9 +86,9 @@ body {
       transform: translate(-50%, -50%);
       top: 50%;
       left: 50%;
-      width: 3rem;
-      height: 4px;
-      background-color: red;
+      width: 2.5rem;
+      height: 3px;
+      background-color: var(--global-color1);
       transition: 0.3s all ease;
     }
     .line1 {
@@ -116,53 +120,55 @@ body {
     @include dislayFlex();
     text-decoration: none;
     transition: 0.5s all ease;
-    .logo-image {
-      background-image: url(./images/marvel-logo.png);
-      width: 8rem;
-      height: 4rem;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+    cursor: pointer;
+    .icon {
+      color: var(--global-color1);
+      font-size: 2.5rem;
+      margin-right: 0.3rem;
     }
     .logo-text {
       margin-left: 0.2rem;
       text-align: left;
       color: white;
-      color: red;
-      font-size: 1.3rem;
+      color: var(--global-color1);
+      font-size: 1.2rem;
       font-weight: 600;
+      padding-top: 0.5rem;
     }
   }
   .text-input {
     @include dislayFlex();
-    height: 4rem;
+    height: 3rem;
     background-color: grey;
     width: auto;
-    background-color: red;
-    border-radius: 1rem 0 1rem 0;
     overflow: hidden;
     z-index: 1;
     .input-field {
       height: 100%;
       width: 20rem;
+      padding: 0;
       padding-left: 0.5rem;
-      font-size: 1.2rem;
+      font-size: 1rem;
       outline: none;
       border: none;
       transition: 0.5s all ease;
+      border: 2px solid var(--global-color1);
+      font-family: "Spartan", Helvetica, Sans-Serif;
+
+      border-right: none;
+      background-color: rgb(223, 208, 186);
     }
     .button-submit {
       cursor: pointer;
       @include dislayFlex();
       height: 100%;
-      width: 4rem;
+      width: 3rem;
       color: white;
-      background-color: red;
-      transition: 0.5s all ease;
+      background-color: var(--global-color1);
+      transition: 0.3s all ease;
       border: 3px solid transparent;
-      border-radius: 0 0 1rem 0;
       .icon {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
       }
     }
   }
@@ -173,19 +179,17 @@ body {
   transform: translate(0, 0);
   transform: translate(-100%, 0);
   transition: 1s all ease;
-  top: 6rem;
+  top: 4rem;
   left: 0;
   @include dislapyFlexColumn();
   align-items: flex-start;
   justify-content: flex-start;
-  background-color: black;
-  color: white;
+  background-color: rgb(194, 181, 161);
+  border-right: 2px solid rgb(150, 132, 105);
+  color: var(--global-color1);
   z-index: 4;
   width: auto;
-  height: calc(100% - 6rem);
-  border: 3px solid red;
-  border-left: none;
-  border-right: none;
+  height: calc(100% - 4rem);
   padding: 2rem;
   .category-name {
     margin-bottom: 1rem;
@@ -220,105 +224,19 @@ body {
   }
 }
 
-.hero-wrapper {
+.books-wrapper {
   @include dislapyFlexColumn();
   align-items: flex-start;
   margin-top: 2rem;
   width: 100%;
   .container-title {
     animation: 1s fade-in ease forwards;
-    color: white;
+    animation-delay: 0s;
+    color: var(--global-color1);
     opacity: 0;
-    margin-bottom: 2rem;
-    font-size: 4rem;
-    font-family: "Bangers", Helvetica, Sans-Serif;
-  }
-}
-
-.hero-comics-wrapper {
-  width: 100%;
-  .container-title {
-    animation-delay: 1.5s;
-  }
-}
-
-@keyframes hero-description-animation {
-  0% {
-    transform: translateX(-100%);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes hero-image-animation {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.hero-info-container {
-  @include displayFlexBetween();
-  height: 30rem;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 3rem 0 3rem 0;
-  .hero-image {
-    animation: hero-image-animation 0.5s forwards ease;
-    animation-delay: 0.2s;
-    transform: translateY(-100%);
-    width: 40%;
-    height: 100%;
-    background-color: black;
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
-    border: 6px solid rgb(0, 0, 0);
-    border-radius: 3rem 0 0 0;
-    border-right: transparent;
-  }
-  .hero-description {
-    animation: hero-description-animation 0.5s forwards ease;
-    opacity: 0;
-    transform: translateX(-100%);
-    animation-delay: 0.75s;
-    @include dislapyFlexColumn();
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 100%;
-    width: 60%;
-    background-color: black;
-    color: white;
-    padding: 2rem;
-    border-radius: 0 0 3rem 0;
-    border-left: 6px solid red;
-    .color-text {
-      color: red;
-      margin-right: 0.3rem;
-      font-weight: 500;
-    }
-    .info-div {
-      margin-bottom: 1rem;
-    }
-
-    .hero-about {
-      width: 100%;
-    }
-    .hero-name {
-      font-family: "Bangers", Helvetica, Sans-Serif;
-      text-align: center;
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
-    .hero-about {
-      font-size: 1.1rem;
-      text-align: justify;
-    }
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
   }
 }
 
@@ -335,9 +253,9 @@ body {
   @include dislayFlex();
   justify-content: flex-start;
   width: 100%;
-  font-family: "Bangers", Helvetica, Sans-Serif;
-  font-size: 4rem;
-  color: white;
+  font-size: 3rem;
+  letter-spacing: 0.2rem;
+  color: var(--global-color1);
   margin-top: 2rem;
   animation: 0.5s fade-in ease;
   .icon {
@@ -349,7 +267,7 @@ body {
   }
 }
 
-@keyframes hero-comic-animation {
+@keyframes book-animation {
   0% {
     opacity: 0;
     transform: translate(-100%, 100%) scale(0.3);
@@ -360,58 +278,68 @@ body {
   }
 }
 
-.hero-comics-container {
-  @include dislapyFlexColumn();
+.books-container {
+  @include dislayFlex();
   animation: 0.5s fade-in ease forwards;
   opacity: 0;
-  animation-delay: 2s;
-  justify-content: flex-start;
+  animation-delay: 0.5s;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
   position: relative;
-  .hero-comic {
-    animation: 0.4s hero-comic-animation ease forwards;
+  .book-container {
+    @include dislayFlex();
+    align-items: flex-start;
+    flex-direction: row;
+    animation: 0.4s book-animation ease forwards;
     opacity: 0;
-    width: calc((100% / 4) - 1rem);
+    width: calc(50% - 0.5rem);
+    height: 20rem;
     background-color: white;
     text-decoration: none;
     color: black;
-    border-radius: 3rem 0 3rem 0;
     overflow: hidden;
-    border: 6px solid rgb(0, 0, 0);
     margin-bottom: 1rem;
-
-    .comic-poster {
-      height: 30rem;
-      width: 100%;
+    .book-poster {
+      height: 100%;
+      width: 20rem;
       background-size: cover;
       background-position: center;
       cursor: pointer;
     }
-    .comic-info {
+    .book-info {
       width: 100%;
       @include dislapyFlexColumn();
       align-items: flex-start;
       color: black;
       padding: 1rem;
-      border-top: 6px solid rgb(255, 0, 0);
       .color-text {
-        color: red;
+        color: rgb(194, 126, 0);
         margin-right: 0.3rem;
         font-weight: 500;
       }
       .info-div {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
       }
       div:last-of-type {
         margin-bottom: 0;
       }
-      .comic-title {
+      .book-title {
         font-size: 1.3rem;
-        font-weight: 500;
+        font-weight: 600;
       }
-      .comic-characters-container,
-      .comic-creators-container {
+      .book-description {
+        overflow: hidden;
+        display: block;
+        text-align: justify;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .book-characters-container,
+      .book-creators-container {
         @include dislayFlex();
         width: 100%;
         justify-content: flex-start;
@@ -430,21 +358,21 @@ body {
 @media only screen and (min-width: 1025px) {
   .header {
     .burger-menu:hover {
-      height: 1.5rem;
+      height: 1rem;
     }
 
     .burger-menu-clicked:hover {
       height: 2rem;
       .line {
-        width: 2.5rem;
+        width: 2rem;
       }
     }
 
     .text-input {
       .button-submit:hover {
-        background-color: white;
-        border: 3px solid red;
-        color: red;
+        background-color: rgb(194, 181, 161);
+        border: 2px solid var(--global-color1);
+        color: var(--global-color1);
       }
     }
   }
@@ -483,32 +411,17 @@ body {
     padding: 0 1rem;
   }
 
-  .hero-comics-container {
-    .hero-comic {
-      width: calc((100% / 3) - 1rem);
+  .books-container {
+    .book-container {
+      width: 100%;
     }
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .hero-comics-container {
-    .hero-comic {
-      width: calc((100% / 2) - 1rem);
-    }
-  }
-
-  .header {
-    .text-input {
-      .input-field {
-        padding: 0;
-      }
-    }
-  }
-
-  .hero-wrapper {
+  .books-wrapper {
     margin-top: 1rem;
     .container-title {
-      font-size: 3rem;
       margin-bottom: 1rem;
     }
   }
@@ -524,12 +437,8 @@ body {
   }
 
   .header {
-    height: 5rem;
+    height: 4rem;
     .logo-container {
-      .logo-image {
-        width: 6rem;
-        height: 3rem;
-      }
       .logo-text {
         font-size: 1.1rem;
       }
@@ -546,45 +455,62 @@ body {
   }
 
   .side-menu {
+    top: 4rem;
     width: 100%;
+    height: calc(100% - 4rem);
   }
 
-  .side-menu {
-    top: 5rem;
-    height: calc(100% - 5rem);
-  }
-
-  .hero-wrapper {
-    align-items: center;
-  }
-
-  .hero-comics-container {
-    .hero-comic {
+  .books-wrapper {
+    .container-title {
+      font-size: 2rem;
+      text-align: center;
       width: 100%;
+    }
+  }
+
+  .books-container {
+    .book-container {
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      .book-poster {
+        height: 25rem;
+        width: 100%;
+      }
     }
   }
 
   .data-info-text {
+    flex-direction: column;
     justify-content: center;
+
+    .message-text {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .icon {
+      font-size: 3rem;
+    }
   }
 
-  .hero-info-container {
+  .book-info-container {
     @include dislapyFlexColumn();
     width: 100%;
     height: auto;
-    .hero-image {
-      height: 25rem;
+    .book-image {
+      height: 22rem;
       width: 100%;
       border-right: 6px solid black;
     }
-    .hero-description {
+    .book-description {
       flex-direction: row;
       flex-wrap: wrap;
       padding: 1rem;
       border-top: 6px solid red;
       border-left: none;
       width: 100%;
-      .hero-name {
+      .book-name {
         text-align: center;
         width: 100%;
         font-size: 3rem;
@@ -601,8 +527,8 @@ body {
 }
 
 @media only screen and (max-width: 375px) {
-  .hero-info-container {
-    .hero-image {
+  .book-info-container {
+    .book-image {
       height: 20rem;
     }
   }
@@ -622,11 +548,13 @@ body {
   }
 
   .data-info-text {
-    font-size: 2.5rem;
+    .message-text {
+      font-size: 1.5rem;
+    }
   }
 
-  .hero-info-container {
-    .hero-description {
+  .book-info-container {
+    .book-description {
       .info-numbers {
         width: 100%;
       }

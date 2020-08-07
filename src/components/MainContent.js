@@ -1,38 +1,23 @@
 import React from "react";
 //import $ from "jquery";
-import HeroData from "./HeroData";
-import ComicsData from "./ComicsData";
+import BooksData from "./BooksData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
-// class MainContent extends React.Component {
-//   render() {
 class MainContent extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      heroAboutData: [],
-      heroComicsData: [],
-      isLoadingAbout: false,
-      isLoadingComics: false,
+      booksData: [],
+      isLoadingBooks: false,
       errorAbout: null,
-      errorComics: null,
+      errorBooks: null,
       search: null
     };
   }
 
-  /*componentDidMount() {
-    const apiKey = "88ebe414618afa23ec34c99800b6ca2d";
-    let characterName = "hlk";
-    const marvelUrl = "https://gateway.marvel.com:443/v1/public/characters";
-    const dataUrlHeroAbout = `${marvelUrl}?name=${characterName}&apikey=${apiKey}`;
-    fetch(dataUrlHeroAbout)
-      .then((response) => response.json())
-      .then((data) => (data.data.total > 0 ? this.setState({ heroAboutData: data.data, isLoadingAbout: false }) : null))
-      .catch((errorAbout) => this.setState({ errorAbout, isLoadingAbout: false }));
-  }*/
   componentDidMount() {
     this.fetchData();
   }
@@ -45,16 +30,13 @@ class MainContent extends React.Component {
   }
 
   fetchData() {
-    this.setState({ isLoadingAbout: true, isLoadingComics: true, errorAbout: false, errorComics: false });
+    this.setState({ isLoadingBooks: true, errorAbout: false, errorBooks: false });
 
-    // const apiKey = "88ebe414618afa23ec34c99800b6ca2d";
-    const apiKey = "233a44adf3f0c2e7cb6194d99ef03998";
-    let characterName = this.props.searchInput;
+    let searchInputText = this.props.searchInput;
 
-    const marvelUrl = "https://gateway.marvel.com:443/v1/public/characters";
-    const dataUrlHeroAbout = `${marvelUrl}?name=${characterName}&apikey=${apiKey}`;
-    if (characterName !== "") {
-      fetch(dataUrlHeroAbout)
+    const dataUrlBooks = `https://www.googleapis.com/books/v1/volumes?q=${searchInputText}`;
+    if (searchInputText !== "") {
+      fetch(dataUrlBooks)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -63,58 +45,32 @@ class MainContent extends React.Component {
           }
         })
         .then((data) => {
-          if (data.data.total > 0) {
-            this.setState({ heroAboutData: data.data, isLoadingAbout: false });
-          }
-
-          let characterID = data.data.results[0].id;
-          const dataUrlHeroComics = `${marvelUrl}/${characterID}/comics?apikey=${apiKey}`;
-
-          fetch(dataUrlHeroComics)
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.data.total > 0) {
-                this.setState({ heroComicsData: data.data, isLoadingComics: false });
-              }
-            })
-            .catch((errorComics) => {
-              this.setState({ errorComics, isLoadingComics: false });
-            });
+          this.setState({ booksData: data.items, isLoadingBooks: false });
         })
-
-        .catch((errorAbout) => this.setState({ errorAbout, isLoadingAbout: false }));
+        .catch((errorAbout) => this.setState({ errorAbout, isLoadingBooks: false }));
     }
   }
 
   render() {
-    const { heroAboutData, heroComicsData, isLoadingComics, isLoadingAbout, errorAbout, errorComics } = this.state;
+    const { booksData, isLoadingBooks, errorAbout, errorBooks } = this.state;
 
     if (errorAbout) {
       return (
         <div className="data-info-text">
-          <div className="message-text">Hero {this.props.searchInput} does not exist . . .</div>
+          <div className="message-text">Book {this.props.searchInput} does not exist . . .</div>
           <FontAwesomeIcon className="icon icon-exclamation" icon={faExclamation} />
         </div>
       );
     }
 
-    if (errorComics) {
-      return <div className="data-info-text">{errorComics.message}</div>;
+    if (errorBooks) {
+      return <div className="data-info-text">{errorBooks.message}</div>;
     }
 
-    if (isLoadingAbout) {
+    if (isLoadingBooks) {
       return (
         <div className="data-info-text">
-          <div className="message-text">Loading hero</div>
-          <FontAwesomeIcon className="icon" icon={faSpinner} />
-        </div>
-      );
-    }
-
-    if (isLoadingComics) {
-      return (
-        <div className="data-info-text">
-          <div className="message-text">Loading hero</div>
+          <div className="message-text">Loading Books</div>
           <FontAwesomeIcon className="icon" icon={faSpinner} />
         </div>
       );
@@ -122,8 +78,7 @@ class MainContent extends React.Component {
 
     return (
       <div className="main-content-container">
-        {heroAboutData.total > 0 ? <HeroData heroAboutData={heroAboutData.results[0]} /> : <div className="data-info-text">Character does not exist</div>}
-        {heroComicsData.total > 0 ? <ComicsData heroComicsData={heroComicsData.results} /> : <div className="data-info-text">Loading hero comics data...</div>}
+        {booksData.length > 0 ? <BooksData booksData={booksData} searchInput={this.props.searchInput} /> : <div className="data-info-text">Loading Books</div>}
       </div>
     );
   }

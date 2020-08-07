@@ -5,32 +5,32 @@ if (dataAmount % columnAmount == 0) {
   dataAmountInColumn = dataAmount / columnAmount;
 }
 
-var containerMinHeight = comicsSelectorHeight / columnAmount;
+var containerMinHeight = booksSelectorHeight / columnAmount;
 var containerSetHeight = 0;
-var comicsInColumn = 0;
+var booksInColumn = 0;
 
-comicsSelector.forEach((comic, index) => {
+booksSelector.forEach((book, index) => {
   if (containerMinHeight > containerSetHeight) {
-    containerSetHeight = containerSetHeight + $(comic).height() + 16;
-    comicsInColumn = index;
+    containerSetHeight = containerSetHeight + $(book).height() + 16;
+    booksInColumn = index;
   }
 });
 
-$(".hero-comics-container").css("height", containerSetHeight);
+$(".book-books-container").css("height", containerSetHeight);
 /*
           var leftColumnHeight = containerSetHeight;
-          var containerFullHeight = comicsSelectorHeight;
+          var containerFullHeight = booksSelectorHeight;
           var count = 1;
 
-           comicsSelector.forEach((comic) => {
-            if (leftColumnHeight > $(comic).height() && count < columnAmount) {
-              leftColumnHeight = leftColumnHeight - $(comic).height();
+           booksSelector.forEach((book) => {
+            if (leftColumnHeight > $(book).height() && count < columnAmount) {
+              leftColumnHeight = leftColumnHeight - $(book).height();
             } else {
               containerFullHeight = containerFullHeight - containerMinHeight;
               leftColumnHeight = containerMinHeight;
               count++;
             }
             if (containerFullHeight < 0) {
-              $(".hero-comics-container").css("height", containerSetHeight + $(comicsSelector[comicsInColumn]).height());
+              $(".book-books-container").css("height", containerSetHeight + $(booksSelector[booksInColumn]).height());
             }
           });*/

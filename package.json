@@ -1,6 +1,6 @@
 {
-  "homepage": "http://robertasliekis.github.io/hero-search",
-  "name": "15-marvel-search",
+  "homepage": "http://robertasliekis.github.io/book-search",
+  "name": "16-book-search",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
